@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "carbon-aware-scheduler"
+version = "1.0.0"
+description = "Dynamic Carbon-Aware Cloud Workload Scheduler"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "scikit-learn>=1.2.0",
+    "matplotlib>=3.7.0",
+    "streamlit>=1.25.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "python-pptx>=0.6.21",
+    "pydantic>=2.0.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
