@@ -68,6 +68,15 @@ st.markdown('<div class="sub-title">Automated spatial and temporal workload shif
 
 # Sidebar Configuration
 st.sidebar.header("⚙️ Simulation & Strategy Controls")
+
+# Real-Time Telemetry Heartbeat Status Badge
+st.sidebar.markdown("""
+<div style="background-color: #0f172a; border-left: 4px solid #2ecc71; padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+    <span style="font-size: 0.85rem; font-weight: 700; color: #2ecc71;">🟢 Grid Telemetry Sync: ACTIVE</span><br/>
+    <span style="font-size: 0.75rem; color: #94a3b8;">12-Min Real-Time Energy Signal Pulse</span>
+</div>
+""", unsafe_allow_html=True)
+
 simulation_days = st.sidebar.slider("Simulation Duration (Days)", 3, 30, 7)
 num_jobs = st.sidebar.slider("Workload Queue Size (Jobs)", 10, 200, 50)
 

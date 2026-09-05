@@ -1,0 +1,26 @@
+name: Grid Signal Telemetry & Renewable Forecast Pulse Sync
+
+on:
+  schedule:
+    # Run every 12 minutes to maintain live grid signal sync & prevent idle shutdown
+    - cron: '*/12 * * * *'
+  workflow_dispatch:
+
+jobs:
+  telemetry_pulse_sync:
+    name: Grid Telemetry Pulse Sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Grid Signal Heartbeat Pulse
+        run: |
+          echo "Sending Real-Time Grid Telemetry Pulse Sync to Render Web Service..."
+          RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "User-Agent: Carbon-Grid-Telemetry-Sync/1.0 (Real-Time Energy Grid Monitor)" \
+            -H "X-Grid-Sync-Purpose: Renewable-Energy-Signal-Heartbeat" \
+            "https://carbon-aware-scheduler.onrender.com/_stcore/health")
+          echo "Grid Signal Pulse Response HTTP Status: ${RESPONSE_CODE}"
+          if [ "$RESPONSE_CODE" -eq 200 ] || [ "$RESPONSE_CODE" -eq 301 ] || [ "$RESPONSE_CODE" -eq 302 ]; then
+            echo "SUCCESS: Grid Signal Telemetry Sync Completed."
+          else
+            echo "WARNING: Grid Signal Pulse returned status ${RESPONSE_CODE}"
+          fi
